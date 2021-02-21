@@ -85,13 +85,20 @@ type descriptor struct {
 }
 
 // New initializes a Bus struct that embeds a btcd RPC client.
-func New(host string, user string, pass string, noTLS bool) (*Bus, error) {
+func New(host string, user string, pass string, noTLS bool, tor bool) (*Bus, error) {
 	log.Info("Warming up...")
+
+	// Optionally proxy through locally running Tor instance
+	proxy := ""
+	if tor {
+		proxy = "socks5://127.0.0.1:9050"
+	}
 
 	// Prepare the connection config to initialize the rpcclient.Client
 	// pool with.
 	connCfg := &rpcclient.ConnConfig{
 		Host:         fmt.Sprintf("%s/wallet/%s", host, walletName),
+		Proxy:        proxy,
 		User:         user,
 		Pass:         pass,
 		HTTPPostMode: true,

@@ -24,6 +24,7 @@ type Configuration struct {
 	RPCUser     *string   `json:"rpcuser"`
 	RPCPassword *string   `json:"rpcpass"`
 	NoTLS       bool      `json:"notls"`
+	Tor         bool      `json:"tor"`
 	Accounts    []Account `json:"accounts"`
 }
 

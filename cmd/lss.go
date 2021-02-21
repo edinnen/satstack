@@ -45,6 +45,7 @@ func startup() *svc.Service {
 		*configuration.RPCUser,
 		*configuration.RPCPassword,
 		configuration.NoTLS,
+		configuration.Tor,
 	)
 	if err != nil {
 		log.WithFields(log.Fields{
